@@ -33,15 +33,33 @@ const array2 = ['a', 3, 4, 2] // should return 4
 const array3 = [] // should return 0
 
 function biggestNumberInArray(arr) {
-
+  let biggest = 0;
+  arr.forEach(item => {
+    if(item > biggest) {
+      biggest = item;
+    }
+  })
+  return biggest;
 }
 
 function biggestNumberInArray2(arr) {
-
+  let biggest = 0;
+  for (item of arr) {
+    if(item > biggest) {
+      biggest = item;
+    }
+  }
+  return biggest;
 }
 
 function biggestNumberInArray3(arr) {
-
+  let biggest = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if(item > biggest) {
+      biggest = arr[i];
+    }
+  }
+  return biggest;
 }
 
 
@@ -54,5 +72,11 @@ amazonBasket = {
 }
 
 function checkBasket(basket, lookingFor) {
-
+  for(item in basket)
+  {
+    if(item === lookingFor) {
+      return `${lookingFor} is in your basket`
+    }
+  }
+  return `${lookingFor} is not in your basket`
 }
