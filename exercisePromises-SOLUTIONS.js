@@ -27,10 +27,10 @@ Promise.reject('failed')
 // #5) Use Promise.all to fetch all of these people from Star Wars (SWAPI) at the same time.
 // Console.log the output and make sure it has a catch block as well.
 const urls = [
-  'https://swapi.co/api/people/1',
-  'https://swapi.co/api/people/2',
-  'https://swapi.co/api/people/3',
-  'https://swapi.co/api/people/4'
+  'https://swapi.dev/api/people/1/',
+  'https://swapi.dev/api/people/2/',
+  'https://swapi.dev/api/people/3/',
+  'https://swapi.dev/api/people/4/'
 ]
 
 Promise.all(urls.map(url =>
@@ -46,3 +46,35 @@ Promise.all(urls.map(url =>
 
 // #6) Change one of your urls above to make it incorrect and fail the promise
 // does your catch block handle it?
+
+
+//ES9 Object spread operator.
+const animals = {
+  tiger: 23,
+  lion: 5,
+  monkey:2,
+  bird:40
+}
+const array = [1,2,3,4,5];
+function sum(a,b,c,d,e) {
+  return a+b+c+d+e;
+}
+sum(...array);
+
+const { tiger, lion, ...rest} = animals;
+
+function objectSpread(p1,p2,p3) {
+  console.log(p1);
+  console.log(p2);
+  console.log(p3);  
+}
+objectSpread(tiger, lion, rest);
+
+//rest is a new object
+/*
+rest {
+  lion:5,
+  monkey:2
+}
+*/
+
