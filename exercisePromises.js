@@ -26,10 +26,10 @@ Promise.reject('failed')
 // #5) Use Promise.all to fetch all of these people from Star Wars (SWAPI) at the same time.
 // Console.log the output and make sure it has a catch block as well.
 const urls = [
-  'https://swapi.co/api/people/1',
-  'https://swapi.co/api/people/2',
-  'https://swapi.co/api/people/3',
-  'https://swapi.co/api/people/4'
+  'https://swapi.dev/api/people/1',
+  'https://swapi.dev/api/people/2',
+  'https://swapi.dev/api/people/3',
+  'https://swapi.dev/api/people/4'
 ]
 
 Promise.all(urls.map(url =>
@@ -81,5 +81,67 @@ const getData = async function () {
   } catch (err) {
     console.log('OPPS', err);
   }
-
 }
+
+//same as above 
+const getData2 = async function () {
+  try {
+    const [users, posts, albums] = await Promise.all(
+      urlsPlaceholder.map(async function(url) {
+        const response = await fetch(url);
+        return response.json();
+      }));
+
+    console.log('Users', users);
+    console.log('posts', posts);
+    console.log('albums', albums);
+
+  } catch (err) {
+    console.log('OPPS', err);
+  }
+}
+
+//for await of is new
+const getData3 = async function() {
+  const arrayOfPromises = urlsPlaceholder.map(url => fetch(url));
+  for await (let request of arrayOfPromises) {
+    const data = await request.json();
+    console.log(data);
+  }
+}
+
+//ES9 Object spread operator.
+const animals = {
+  tiger: 23,
+  lion: 5,
+  monkey:2,
+  bird:40
+}
+const array = [1,2,3,4,5];
+function sum(a,b,c,d,e) {
+  return a+b+c+d+e;
+}
+sum(...array);
+
+const { tiger, lion, ...rest} = animals;
+
+function objectSpread(p1,p2,p3) {
+  console.log(p1);
+  console.log(p2);
+  console.log(p3);  
+}
+objectSpread(tiger, lion, rest);
+
+//rest is a new object
+/*
+rest {
+  lion:5,
+  monkey:2
+}
+*/
+
+/*
+try,
+catch,
+finally //always called. () => empty
+*/
