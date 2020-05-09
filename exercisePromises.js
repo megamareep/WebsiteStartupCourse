@@ -32,11 +32,54 @@ const urls = [
   'https://swapi.co/api/people/4'
 ]
 
-Promise.all(urls.map(url => 
+Promise.all(urls.map(url =>
   fetch(url).then(people => people.json())
-  )).then(array => {
-    array.forEach(console.log);
-  }).catch(error => console.log('ERRG fix it',error))
+)).then(array => {
+  array.forEach(console.log);
+}).catch(error => console.log('ERRG fix it', error))
 
 // #6) Change one of your urls above to make it incorrect and fail the promise
 // does your catch block handle it?
+
+
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(resp => resp.json())
+  .then(console.log)
+
+async function fetchUsers() {
+  const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+  const data = await resp.json();
+  console.log(data);
+}
+
+const urlsPlaceholder = [
+  'https://jsonplaceholder.typicode.com/users',
+  'https://jsonplaceholder.typicode.com/posts',
+  'https://jsonplaceholder.typicode.com/albums',
+]
+
+
+Promise.all(urlsPlaceholder.map(url =>
+  fetch(url).then(people => people.json())
+)).then(array => {
+  console.log('Users', array[0]);
+  console.log('posts', array[1]);
+  console.log('albums', array[2]);
+}).catch(error => console.log('ERRG fix it', error))
+
+//same as above 
+const getData = async function () {
+  try {
+    const [users, posts, albums] = await Promise.all(urlsPlaceholder.map(url =>
+      fetch(url).then(people => people.json())
+    ))
+
+    console.log('Users', users);
+    console.log('posts', posts);
+    console.log('albums', albums);
+
+  } catch (err) {
+    console.log('OPPS', err);
+  }
+
+}
